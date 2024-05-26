@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class Plansza {
             obiekt.ruch(this);
             sprawdzKolizje(obiekt);
         }
+        sprawdzKoniecSymulacji();
     }
 
     public void sprawdzKolizje(Obiekt obiekt){
@@ -47,13 +49,8 @@ public class Plansza {
         double dx = random.nextDouble() * 2 - 1;
         double dy = random.nextDouble() * 2 - 1;
 
-        obiekt.x += dx;
-        obiekt.y += dy;
-
-        if (obiekt.x < 0) obiekt.x = 0;
-        if (obiekt.y < 0) obiekt.y = 0;
-        if (obiekt.x > szerokosc) obiekt.x = szerokosc;
-        if (obiekt.y > wysokosc) obiekt.y = wysokosc;
+        obiekt.ruchZPredkoscia(dx,dy,1.0);
+        ograniczRuch(obiekt);
     }
 
     public void ruchObiektu(Obiekt obiekt){
@@ -74,6 +71,15 @@ public class Plansza {
         ograniczRuch(obiekt);
     }
 
+    private Obiekt znajdzCel(Obiekt obiekt){
+        for (Obiekt inny : obiekty){
+            if (obiekt.czyGoni(inny) || obiekt.czyUciekaPrzed(inny)){
+                return inny;
+            }
+        }
+        return null;
+    }
+
     private void ograniczRuch(Obiekt obiekt){
         if (obiekt.getX() < 0) obiekt.x = 0;
         if (obiekt.getY() < 0) obiekt.y = 0;
@@ -82,7 +88,22 @@ public class Plansza {
     }
 
     private void sprawdzKoniecSymulacji(){
+        long liczbaNozyczek = obiekty.stream().filter(o -> o instanceof Nozyczki).count();
+        long liczbaKamieni = obiekty.stream().filter(o -> o instanceof Kamien).count();
+        long liczbaPapierow = obiekty.stream().filter(o -> o instanceof Papier).count();
 
+        if (liczbaNozyczek == 0 && liczbaKamieni == 0){
+            zamrozSymulacje("Papier wygrywa!");
+        } else if (liczbaKamieni == 0 && liczbaPapierow == 0) {
+            zamrozSymulacje("Nozyczki wygrywaja!");
+        }  else if (liczbaNozyczek == 0 && liczbaPapierow == 0) {
+            zamrozSymulacje("Kamien wygrywaja!");
+        }
+    }
+
+    private void zamrozSymulacje(String wiadomosc){
+        JOptionPane.showMessageDialog(null, wiadomosc);
+        System.exit(0);
     }
 
     public List<Obiekt> getObiekty(){

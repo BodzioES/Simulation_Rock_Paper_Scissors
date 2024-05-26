@@ -39,9 +39,11 @@ public class PlanszaGUI extends JPanel implements ActionListener {
         JFrame frame = new JFrame("Symulacja Planszy");
         Plansza plansza = new Plansza(800,800);
 
-        plansza.dodajObiekt(new Nozyczki(100,100));
-        plansza.dodajObiekt(new Kamien(200,200));
-        plansza.dodajObiekt(new Papier(300,300));
+        for (int i = 0; i < 10; i++){
+            plansza.dodajObiekt(new Nozyczki(Math.random() * 800, Math.random() * 600));
+            plansza.dodajObiekt(new Kamien(Math.random() * 800, Math.random() * 600));
+            plansza.dodajObiekt(new Papier(Math.random() * 800, Math.random() * 600));
+        }
 
         PlanszaGUI panel = new PlanszaGUI(plansza);
         frame.add(panel);
