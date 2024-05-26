@@ -1,5 +1,5 @@
-public class Nozyczki extends Obiekt {
-    public Nozyczki(double x, double y) {
+public class Papier extends Obiekt {
+    public Papier(double x, double y) {
         super(x, y);
     }
 
