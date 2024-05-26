@@ -10,7 +10,7 @@ public abstract class Obiekt {
 
     public abstract void kolizja(Obiekt inny, Plansza plansza);
 
-    public double getx(){
+    public double getX(){
         return x;
     }
 

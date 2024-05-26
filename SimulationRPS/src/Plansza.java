@@ -40,7 +40,7 @@ public class Plansza {
     }
 
     private double odleglosc(Obiekt a, Obiekt b){
-        return Math.sqrt(Math.pow(a.getx() - b.getx(),2)) + Math.pow(a.getY() - b.getY(),2);
+        return Math.sqrt(Math.pow(a.getX() - b.getX(),2)) + Math.pow(a.getY() - b.getY(),2);
     }
 
     public void losowyRuch(Obiekt obiekt){
