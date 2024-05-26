@@ -3,9 +3,10 @@ import java.util.List;
 import java.util.Random;
 
 public class Plansza {
-    private List<Obiekt> obiekty;
-    private double szerokosc, wysokosc;
-    private Random random;
+    private final List<Obiekt> obiekty;
+    private final double szerokosc;
+    private final double wysokosc;
+    private final Random random;
 
     public Plansza(double szerokosc, double wysokosc) {
         this.szerokosc = szerokosc;
@@ -18,10 +19,28 @@ public class Plansza {
         obiekty.add(obiekt);
     }
 
+    public void zamienObiekt(Obiekt stary, Obiekt nowy){
+        obiekty.remove(stary);
+        obiekty.add(nowy);
+    }
+
     public void symuluj(){
         for (Obiekt obiekt : new ArrayList<>(obiekty)){
             obiekt.ruch(this);
+            sprawdzKolizje(obiekt);
         }
+    }
+
+    public void sprawdzKolizje(Obiekt obiekt){
+        for (Obiekt inny : new ArrayList<>(obiekty)){
+            if (obiekt != inny && odleglosc(obiekt, inny) < 1.0){
+                obiekt.kolizja(inny,this);
+            }
+        }
+    }
+
+    private double odleglosc(Obiekt a, Obiekt b){
+        return Math.sqrt(Math.pow(a.getx() - b.getx(),2)) + Math.pow(a.getY() - b.getY(),2);
     }
 
     public void losowyRuch(Obiekt obiekt){
@@ -35,6 +54,10 @@ public class Plansza {
         if (obiekt.y < 0) obiekt.y = 0;
         if (obiekt.x > szerokosc) obiekt.x = szerokosc;
         if (obiekt.y > wysokosc) obiekt.y = wysokosc;
+    }
+
+    public List<Obiekt> getObiekty(){
+        return obiekty;
     }
 
 }

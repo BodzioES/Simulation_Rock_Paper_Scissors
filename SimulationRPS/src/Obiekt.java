@@ -7,4 +7,14 @@ public abstract class Obiekt {
     }
 
     public abstract void ruch(Plansza plansza);
+
+    public abstract void kolizja(Obiekt inny, Plansza plansza);
+
+    public double getx(){
+        return x;
+    }
+
+    public double getY(){
+        return y;
+    }
 }

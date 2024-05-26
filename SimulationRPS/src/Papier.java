@@ -7,4 +7,11 @@ public class Papier extends Obiekt {
     public void ruch(Plansza plansza) {
         plansza.losowyRuch(this);
     }
+
+    @Override
+    public void kolizja(Obiekt inny, Plansza plansza) {
+        if (inny instanceof Nozyczki) {
+            plansza.zamienObiekt(this, new Nozyczki(x, y));
+        }
+    }
 }
