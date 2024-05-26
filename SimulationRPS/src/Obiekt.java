@@ -10,6 +10,15 @@ public abstract class Obiekt {
 
     public abstract void kolizja(Obiekt inny, Plansza plansza);
 
+    public abstract boolean czyGoni(Obiekt inny);
+
+    public abstract boolean czyUciekaPrzed(Obiekt inny);
+
+    public void ruchZPredkoscia(double dx, double dy, double predkosc){
+        x += dx * predkosc;
+        y += dy * predkosc;
+    }
+
     public double getX(){
         return x;
     }

@@ -56,6 +56,35 @@ public class Plansza {
         if (obiekt.y > wysokosc) obiekt.y = wysokosc;
     }
 
+    public void ruchObiektu(Obiekt obiekt){
+        Obiekt cel = znajdzCel(obiekt);
+        if (cel != null){
+            double dx = cel.getX() - obiekt.getX();
+            double dy = cel.getY() - obiekt.getY();
+            double odleglosc = Math.sqrt(dx * dx + dy * dy);
+
+            if (obiekt.czyGoni(cel)){
+                obiekt.ruchZPredkoscia(dx / odleglosc, dy / odleglosc, 2.0);
+            } else if (obiekt.czyUciekaPrzed(cel)) {
+                obiekt.ruchZPredkoscia(-dx / odleglosc, -dy / odleglosc, 1.0);
+            }
+        }else {
+            losowyRuch(obiekt);
+        }
+        ograniczRuch(obiekt);
+    }
+
+    private void ograniczRuch(Obiekt obiekt){
+        if (obiekt.getX() < 0) obiekt.x = 0;
+        if (obiekt.getY() < 0) obiekt.y = 0;
+        if (obiekt.getX() > szerokosc) obiekt.x = szerokosc;
+        if (obiekt.getY() > wysokosc) obiekt.x = wysokosc;
+    }
+
+    private void sprawdzKoniecSymulacji(){
+
+    }
+
     public List<Obiekt> getObiekty(){
         return obiekty;
     }

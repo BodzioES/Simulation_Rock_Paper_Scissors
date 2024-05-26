@@ -14,4 +14,14 @@ public class Papier extends Obiekt {
             plansza.zamienObiekt(this, new Nozyczki(x, y));
         }
     }
+
+    @Override
+    public boolean czyGoni(Obiekt inny){
+        return  inny instanceof Kamien;
+    }
+
+    @Override
+    public boolean czyUciekaPrzed(Obiekt inny){
+        return  inny instanceof Nozyczki;
+    }
 }
