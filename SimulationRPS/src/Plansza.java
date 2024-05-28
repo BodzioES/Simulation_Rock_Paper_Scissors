@@ -21,6 +21,8 @@ public class Plansza {
     }
 
     public void zamienObiekt(Obiekt stary, Obiekt nowy){
+        stary.x = nowy.getX();
+        stary.y = nowy.getY();
         obiekty.remove(stary);
         obiekty.add(nowy);
     }
@@ -35,7 +37,7 @@ public class Plansza {
 
     public void sprawdzKolizje(Obiekt obiekt){
         for (Obiekt inny : new ArrayList<>(obiekty)){
-            if (obiekt != inny && odleglosc(obiekt, inny) < 1.0){
+            if (obiekt != inny && odleglosc(obiekt, inny) < 10.0){
                 obiekt.kolizja(inny,this);
             }
         }
@@ -60,10 +62,15 @@ public class Plansza {
             double dy = cel.getY() - obiekt.getY();
             double odleglosc = Math.sqrt(dx * dx + dy * dy);
 
+            if (odleglosc > 0){
+                dx /= odleglosc;
+                dy /= odleglosc;
+            }
+
             if (obiekt.czyGoni(cel)){
-                obiekt.ruchZPredkoscia(dx / odleglosc, dy / odleglosc, 2.0);
+                obiekt.ruchZPredkoscia(dx, dy, 2.0);
             } else if (obiekt.czyUciekaPrzed(cel)) {
-                obiekt.ruchZPredkoscia(-dx / odleglosc, -dy / odleglosc, 1.0);
+                obiekt.ruchZPredkoscia(-dx, -dy, 1.0);
             }
         }else {
             losowyRuch(obiekt);
@@ -84,7 +91,7 @@ public class Plansza {
         if (obiekt.getX() < 0) obiekt.x = 0;
         if (obiekt.getY() < 0) obiekt.y = 0;
         if (obiekt.getX() > szerokosc) obiekt.x = szerokosc;
-        if (obiekt.getY() > wysokosc) obiekt.x = wysokosc;
+        if (obiekt.getY() > wysokosc) obiekt.y = wysokosc;
     }
 
     private void sprawdzKoniecSymulacji(){
