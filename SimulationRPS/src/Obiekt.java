@@ -1,9 +1,12 @@
 public abstract class Obiekt {
     protected  double x,y;
+    protected double vx,vy;
 
     public Obiekt(double x, double y){
         this.x = x;
         this.y = y;
+        this.vx = 0;
+        this.vy = 0;
     }
 
     public abstract void ruch(Plansza plansza);
@@ -17,6 +20,13 @@ public abstract class Obiekt {
     public void ruchZPredkoscia(double dx, double dy, double predkosc){
         x += dx * predkosc;
         y += dy * predkosc;
+        x += vx;
+        y += vy;
+    }
+
+    public void odbiOdSciany(){
+        vx = -vx;
+        vy = -vy;
     }
 
     public double getX(){

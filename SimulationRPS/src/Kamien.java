@@ -5,7 +5,7 @@ public class Kamien extends Obiekt{
 
     @Override
     public void ruch(Plansza plansza){
-        plansza.losowyRuch(this);
+        plansza.ruchObiektu(this);
     }
 
     @Override
@@ -17,7 +17,7 @@ public class Kamien extends Obiekt{
 
     @Override
     public boolean czyGoni(Obiekt inny){
-        return  inny instanceof Nozyczki;
+        return inny instanceof Nozyczki;
     }
 
     @Override

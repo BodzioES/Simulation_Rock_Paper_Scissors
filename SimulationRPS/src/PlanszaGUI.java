@@ -4,11 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PlanszaGUI extends JPanel implements ActionListener {
-    private Plansza plansza;
+    private final Plansza plansza;
+    private ImageIcon nozyczkiIkona;
+    private ImageIcon kamienIkona;
+    private ImageIcon papierIkona;
 
     public  PlanszaGUI(Plansza plansza){
         this.plansza = plansza;
-        Timer timer = new Timer(100,this);
+
+        nozyczkiIkona = new ImageIcon("scissor.png");
+        kamienIkona = new ImageIcon("rock.png");
+        papierIkona = new ImageIcon("paper.png");
+
+        Timer timer = new Timer(50,this);
         timer.start();
     }
 
@@ -17,14 +25,11 @@ public class PlanszaGUI extends JPanel implements ActionListener {
         super.paintComponent(g);
         for (Obiekt obiekt : plansza.getObiekty()){
             if (obiekt instanceof Nozyczki){
-                g.setColor(Color.red);
-                g.fillRect((int) obiekt.getX(), (int) obiekt.getY(),10,10);
+                nozyczkiIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
             }else if (obiekt instanceof Kamien){
-                g.setColor(Color.gray);
-                g.fillRect((int) obiekt.getX(), (int) obiekt.getY(),10,10);
+                kamienIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
             }else if (obiekt instanceof Papier){
-                g.setColor(Color.GREEN);
-                g.fillRect((int) obiekt.getX(), (int) obiekt.getY(),10,10);
+                papierIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
             }
         }
     }
@@ -39,7 +44,7 @@ public class PlanszaGUI extends JPanel implements ActionListener {
         JFrame frame = new JFrame("Symulacja Planszy");
         Plansza plansza = new Plansza(800,800);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 20; i++){
             plansza.dodajObiekt(new Nozyczki(Math.random() * 800, Math.random() * 600));
             plansza.dodajObiekt(new Kamien(Math.random() * 800, Math.random() * 600));
             plansza.dodajObiekt(new Papier(Math.random() * 800, Math.random() * 600));

@@ -5,7 +5,7 @@ public class Papier extends Obiekt {
 
     @Override
     public void ruch(Plansza plansza) {
-        plansza.losowyRuch(this);
+        plansza.ruchObiektu(this);
     }
 
     @Override
