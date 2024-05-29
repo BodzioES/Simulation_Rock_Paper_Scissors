@@ -9,19 +9,19 @@ public class Nozyczki extends Obiekt {
     }
 
     @Override
-    public void kolizja(Obiekt inny, Plansza plansza){
-        if (inny instanceof Kamien){
-            plansza.zamienObiekt(this, new Kamien(x,y));
+    public void kolizja(Obiekt inny, Plansza plansza) {
+        if (inny instanceof Papier) {
+            plansza.zamienObiekt(inny, new Nozyczki(inny.getX(), inny.getY()));
         }
     }
 
     @Override
-    public boolean czyGoni(Obiekt inny){
-        return  inny instanceof Papier;
+    public boolean czyGoni(Obiekt inny) {
+        return inny instanceof Papier;
     }
 
     @Override
-    public boolean czyUciekaPrzed(Obiekt inny){
-        return  inny instanceof Kamien;
+    public boolean czyUciekaPrzed(Obiekt inny) {
+        return inny instanceof Kamien;
     }
 }

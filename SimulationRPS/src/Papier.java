@@ -10,18 +10,18 @@ public class Papier extends Obiekt {
 
     @Override
     public void kolizja(Obiekt inny, Plansza plansza) {
-        if (inny instanceof Nozyczki) {
-            plansza.zamienObiekt(this, new Nozyczki(x, y));
+        if (inny instanceof Kamien) {
+            plansza.zamienObiekt(inny, new Papier(inny.getX(), inny.getY()));
         }
     }
 
     @Override
-    public boolean czyGoni(Obiekt inny){
-        return  inny instanceof Kamien;
+    public boolean czyGoni(Obiekt inny) {
+        return inny instanceof Kamien;
     }
 
     @Override
-    public boolean czyUciekaPrzed(Obiekt inny){
-        return  inny instanceof Nozyczki;
+    public boolean czyUciekaPrzed(Obiekt inny) {
+        return inny instanceof Nozyczki;
     }
 }

@@ -1,8 +1,8 @@
 public abstract class Obiekt {
-    protected  double x,y;
-    protected double vx,vy;
+    protected double x, y;
+    protected double vx, vy;
 
-    public Obiekt(double x, double y){
+    public Obiekt(double x, double y) {
         this.x = x;
         this.y = y;
         this.vx = 0;
@@ -17,23 +17,23 @@ public abstract class Obiekt {
 
     public abstract boolean czyUciekaPrzed(Obiekt inny);
 
-    public void ruchZPredkoscia(double dx, double dy, double predkosc){
-        x += dx * predkosc;
-        y += dy * predkosc;
+    public void ruchZPredkoscia(double dx, double dy, double predkosc) {
+        vx = dx * predkosc;
+        vy = dy * predkosc;
         x += vx;
         y += vy;
     }
 
-    public void odbijOdSciany(){
+    public void odbijOdSciany() {
         vx = -vx;
         vy = -vy;
     }
 
-    public double getX(){
+    public double getX() {
         return x;
     }
 
-    public double getY(){
+    public double getY() {
         return y;
     }
 }

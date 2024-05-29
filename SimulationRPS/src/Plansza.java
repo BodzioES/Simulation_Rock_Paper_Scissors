@@ -18,7 +18,7 @@ public class Plansza {
         this.random = new Random();
     }
 
-    public void dodajObiekt(Obiekt obiekt) {
+    public void dodajObiekt(Obiekt obiekt){
         obiekty.add(obiekt);
     }
 
@@ -29,8 +29,8 @@ public class Plansza {
         obiekty.add(nowy);
     }
 
-    public void symuluj() {
-        for (Obiekt obiekt : new ArrayList<>(obiekty)) {
+    public void symuluj(){
+        for (Obiekt obiekt : new ArrayList<>(obiekty)){
             obiekt.ruch(this);
             sprawdzKolizje(obiekt);
         }
@@ -45,21 +45,21 @@ public class Plansza {
         }
     }
 
-    private double odleglosc(Obiekt a, Obiekt b) {
-        return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
+    private double odleglosc(Obiekt a, Obiekt b){
+        return Math.sqrt(Math.pow(a.getX() - b.getX(),2)) + Math.pow(a.getY() - b.getY(),2);
     }
 
-    public void losowyRuch(Obiekt obiekt) {
+    public void losowyRuch(Obiekt obiekt){
         double dx = random.nextDouble() * 2 - 1;
         double dy = random.nextDouble() * 2 - 1;
 
-        obiekt.ruchZPredkoscia(dx, dy, 1.0);
+        obiekt.ruchZPredkoscia(dx,dy,1.0);
         ograniczRuch(obiekt);
     }
 
-    public void ruchObiektu(Obiekt obiekt) {
+    public void ruchObiektu(Obiekt obiekt){
         Obiekt cel = znajdzCel(obiekt);
-        if (cel != null) {
+        if (cel != null){
             double dx = cel.getX() - obiekt.getX();
             double dy = cel.getY() - obiekt.getY();
             double odleglosc = Math.sqrt(dx * dx + dy * dy);
@@ -74,15 +74,15 @@ public class Plansza {
             } else if (obiekt.czyUciekaPrzed(cel)) {
                 obiekt.ruchZPredkoscia(-dx, -dy, PREDKOSC_UCIEKAJACA);
             }
-        } else {
+        }else {
             losowyRuch(obiekt);
         }
         ograniczRuch(obiekt);
     }
 
-    private Obiekt znajdzCel(Obiekt obiekt) {
-        for (Obiekt inny : obiekty) {
-            if (obiekt.czyGoni(inny) || obiekt.czyUciekaPrzed(inny)) {
+    private Obiekt znajdzCel(Obiekt obiekt){
+        for (Obiekt inny : obiekty){
+            if (obiekt.czyGoni(inny) || obiekt.czyUciekaPrzed(inny)){
                 return inny;
             }
         }
@@ -108,26 +108,27 @@ public class Plansza {
         }
     }
 
-    private void sprawdzKoniecSymulacji() {
+    private void sprawdzKoniecSymulacji(){
         long liczbaNozyczek = obiekty.stream().filter(o -> o instanceof Nozyczki).count();
         long liczbaKamieni = obiekty.stream().filter(o -> o instanceof Kamien).count();
         long liczbaPapierow = obiekty.stream().filter(o -> o instanceof Papier).count();
 
-        if (liczbaNozyczek == 0 && liczbaKamieni == 0) {
+        if (liczbaNozyczek == 0 && liczbaKamieni == 0){
             zamrozSymulacje("Papier wygrywa!");
         } else if (liczbaKamieni == 0 && liczbaPapierow == 0) {
             zamrozSymulacje("Nozyczki wygrywaja!");
-        } else if (liczbaNozyczek == 0 && liczbaPapierow == 0) {
+        }  else if (liczbaNozyczek == 0 && liczbaPapierow == 0) {
             zamrozSymulacje("Kamien wygrywaja!");
         }
     }
 
-    private void zamrozSymulacje(String wiadomosc) {
+    private void zamrozSymulacje(String wiadomosc){
         JOptionPane.showMessageDialog(null, wiadomosc);
         System.exit(0);
     }
 
-    public List<Obiekt> getObiekty() {
+    public List<Obiekt> getObiekty(){
         return obiekty;
     }
+
 }
