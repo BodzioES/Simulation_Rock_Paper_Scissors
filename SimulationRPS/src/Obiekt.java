@@ -1,6 +1,7 @@
 public abstract class Obiekt {
     protected double x, y;
     protected double vx, vy;
+    protected static final int OBIEKT_SIZE = 10;
 
     public Obiekt(double x, double y) {
         this.x = x;
@@ -25,6 +26,11 @@ public abstract class Obiekt {
     }
 
     public void odbijOdSciany() {
+        vx = -vx;
+        vy = -vy;
+    }
+
+    public void odbijOdObiekty() {
         vx = -vx;
         vy = -vy;
     }
