@@ -23,16 +23,18 @@ public class PlanszaGUI extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        for (Obiekt obiekt : plansza.getObiekty()){
-            if (obiekt instanceof Nozyczki){
-                nozyczkiIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
-            }else if (obiekt instanceof Kamien){
-                kamienIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
-            }else if (obiekt instanceof Papier){
-                papierIkona.paintIcon(this,g, (int) obiekt.getX(), (int) obiekt.getY());
+        for (Obiekt obiekt : plansza.getObiekty()) {
+            if (obiekt instanceof Nozyczki) {
+                g.setColor(Color.RED);
+            } else if (obiekt instanceof Kamien) {
+                g.setColor(Color.GRAY);
+            } else if (obiekt instanceof Papier) {
+                g.setColor(Color.BLUE);
             }
+            g.fillRect((int) obiekt.getX(), (int) obiekt.getY(), 10, 10);
         }
     }
+
 
     @Override
     public void  actionPerformed(ActionEvent e){
