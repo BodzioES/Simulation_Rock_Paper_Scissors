@@ -13,9 +13,9 @@ public class PlanszaGUI extends JPanel implements ActionListener {
     public  PlanszaGUI(Plansza plansza){
         this.plansza = plansza;
 
-        nozyczkiIkona = new ImageIcon("scissor.png");
-        kamienIkona = new ImageIcon("rock.png");
-        papierIkona = new ImageIcon("paper.png");
+        nozyczkiIkona = new ImageIcon("D:\\Programowanie\\JAVA\\SimulationRPS\\SimulationRPS\\scissor.png");
+        kamienIkona = new ImageIcon("D:\\Programowanie\\JAVA\\SimulationRPS\\SimulationRPS\\rock.png");
+        papierIkona = new ImageIcon("D:\\Programowanie\\JAVA\\SimulationRPS\\SimulationRPS\\paper.png");
 
         Timer timer = new Timer(50,this);
         timer.start();
@@ -26,13 +26,12 @@ public class PlanszaGUI extends JPanel implements ActionListener {
         super.paintComponent(g);
         for (Obiekt obiekt : plansza.getObiekty()) {
             if (obiekt instanceof Nozyczki) {
-                g.setColor(Color.RED);
+                nozyczkiIkona.paintIcon(this, g, (int) obiekt.getX(), (int) obiekt.getY());
             } else if (obiekt instanceof Kamien) {
-                g.setColor(Color.GRAY);
+                kamienIkona.paintIcon(this, g, (int) obiekt.getX(), (int) obiekt.getY());
             } else if (obiekt instanceof Papier) {
-                g.setColor(Color.BLUE);
+                papierIkona.paintIcon(this, g, (int) obiekt.getX(), (int) obiekt.getY());
             }
-            g.fillRect((int) obiekt.getX(), (int) obiekt.getY(), 10, 10);
         }
     }
 

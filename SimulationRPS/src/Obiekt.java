@@ -1,7 +1,7 @@
 public abstract class Obiekt {
     protected double x, y;
     protected double vx, vy;
-    protected static final int OBIEKT_SIZE = 10;
+    protected static final int OBIEKT_SIZE = 10; // Ustawienie stałego rozmiaru obiektów
 
     public Obiekt(double x, double y) {
         this.x = x;
@@ -30,7 +30,7 @@ public abstract class Obiekt {
         vy = -vy;
     }
 
-    public void odbijOdObiekty() {
+    public void odbiOdObiektu() {
         vx = -vx;
         vy = -vy;
     }
@@ -49,5 +49,11 @@ public abstract class Obiekt {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    public boolean czyKolizja(Obiekt inny) {
+        double odlegloscX = this.x - inny.x;
+        double odlegloscY = this.y - inny.y;
+        return Math.sqrt(odlegloscX * odlegloscX + odlegloscY * odlegloscY) < OBIEKT_SIZE;
     }
 }

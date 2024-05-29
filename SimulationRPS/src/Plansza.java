@@ -46,6 +46,22 @@ public class Plansza {
     }
 
     private void odbijObiekty(Obiekt a, Obiekt b) {
+        double deltaX = a.x - b.x;
+        double deltaY = a.y - b.y;
+        double odleglosc = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        if (odleglosc == 0) {
+            odleglosc = 1; // Zapobiega dzieleniu przez zero
+        }
+
+        double overlap = Obiekt.OBIEKT_SIZE - odleglosc;
+
+        a.x += (deltaX / odleglosc) * overlap / 2;
+        a.y += (deltaY / odleglosc) * overlap / 2;
+
+        b.x -= (deltaX / odleglosc) * overlap / 2;
+        b.y -= (deltaY / odleglosc) * overlap / 2;
+
         double tempVx = a.vx;
         double tempVy = a.vy;
         a.vx = b.vx;
