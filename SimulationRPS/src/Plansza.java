@@ -81,12 +81,19 @@ public class Plansza {
     }
 
     private Obiekt znajdzCel(Obiekt obiekt){
+        Obiekt najblizszy = null;
+        double minOdleglosc = Double.MAX_VALUE;
+
         for (Obiekt inny : obiekty){
-            if (obiekt.czyGoni(inny) || obiekt.czyUciekaPrzed(inny)){
-                return inny;
+            if (obiekt != inny && (obiekt.czyGoni(inny) || obiekt.czyUciekaPrzed(inny))){
+                double odleglosc = odleglosc(obiekt,inny);
+                if (odleglosc < minOdleglosc){
+                    minOdleglosc = odleglosc;
+                    najblizszy = inny;
+                }
             }
         }
-        return null;
+        return najblizszy;
     }
 
     private void ograniczRuch(Obiekt obiekt) {
