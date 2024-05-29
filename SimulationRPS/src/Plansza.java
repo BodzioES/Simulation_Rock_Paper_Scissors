@@ -5,15 +5,13 @@ import java.util.Random;
 
 public class Plansza {
     private final List<Obiekt> obiekty;
-    private final double szerokosc;
-    private final double wysokosc;
+    private final double szerokosc = 800.0;
+    private final double wysokosc = 800.0;
     private final Random random;
     private static final double PREDKOSC_GONIACA = 4.0;
     private static final double PREDKOSC_UCIEKAJACA = 2.0;
 
-    public Plansza(double szerokosc, double wysokosc) {
-        this.szerokosc = szerokosc;
-        this.wysokosc = wysokosc;
+    public Plansza() {
         this.obiekty = new ArrayList<>();
         this.random = new Random();
     }
@@ -136,6 +134,14 @@ public class Plansza {
 
     public List<Obiekt> getObiekty(){
         return obiekty;
+    }
+
+    public double getSzerokosc(){
+        return szerokosc;
+    }
+
+    public double getWysokosc(){
+        return wysokosc;
     }
 
 }

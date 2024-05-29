@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class PlanszaGUI extends JPanel implements ActionListener {
     private final Plansza plansza;
+    private static final int OBIEKT_SIZE = 10;
     private final ImageIcon nozyczkiIkona;
     private final ImageIcon kamienIkona;
     private final ImageIcon papierIkona;
@@ -44,17 +45,17 @@ public class PlanszaGUI extends JPanel implements ActionListener {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Symulacja Planszy");
-        Plansza plansza = new Plansza(800,800);
+        Plansza plansza = new Plansza();
 
         for (int i = 0; i < 20; i++){
-            plansza.dodajObiekt(new Nozyczki(Math.random() * 800, Math.random() * 600));
-            plansza.dodajObiekt(new Kamien(Math.random() * 800, Math.random() * 600));
-            plansza.dodajObiekt(new Papier(Math.random() * 800, Math.random() * 600));
+            plansza.dodajObiekt(new Nozyczki(Math.random() * 800, Math.random() * 800));
+            plansza.dodajObiekt(new Kamien(Math.random() * 800, Math.random() * 800));
+            plansza.dodajObiekt(new Papier(Math.random() * 800, Math.random() * 800));
         }
 
         PlanszaGUI panel = new PlanszaGUI(plansza);
         frame.add(panel);
-        frame.setSize(800,600);
+        frame.setSize(800,800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
