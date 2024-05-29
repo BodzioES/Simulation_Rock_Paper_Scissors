@@ -24,7 +24,7 @@ public abstract class Obiekt {
         y += vy;
     }
 
-    public void odbiOdSciany(){
+    public void odbijOdSciany(){
         vx = -vx;
         vy = -vy;
     }

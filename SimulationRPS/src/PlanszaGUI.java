@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class PlanszaGUI extends JPanel implements ActionListener {
     private final Plansza plansza;
-    private ImageIcon nozyczkiIkona;
-    private ImageIcon kamienIkona;
-    private ImageIcon papierIkona;
+    private final ImageIcon nozyczkiIkona;
+    private final ImageIcon kamienIkona;
+    private final ImageIcon papierIkona;
 
     public  PlanszaGUI(Plansza plansza){
         this.plansza = plansza;
